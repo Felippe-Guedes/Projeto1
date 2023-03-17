@@ -7,25 +7,19 @@ export function Leads ({setClientes}) {
     const [name, setName] = useState('')
     const [tel, setTel] = useState('')
     const [end, setEnd] = useState({cep:'', rua:'', numero:'', bairro:'', complemento:'', cidade:'', estado:''})
+    const
 
-    useEffect(() => {
-        let response = ''
-        const encontraEndereco = async () => {
-        const data = await fetch(`https://viacep.com.br/ws/${end.cep}/json/`);
-            
-        const json = await data
-        response = data
-        return data;
-          }
-        if (end.cep.length === 8) {
-            setTimeout(() => {
-                response = encontraEndereco();
-              }, "1000");
-              console.log(response)
-        }
 
-    }, [end.cep])
-    
+	useEffect(() => {
+		fetch(`https://viacep.com.br/ws/${end.cep}/json/`)
+			.then(response => {
+				response.json()
+					.then(data => {
+						console.log(data);
+						setEnd({...end, rua: data.logradouro, cidade: data.localidade, estado: data.uf, bairro: data.bairro  });
+					});
+			});
+	}, [end.cep]);
 
 
     const handleChangeName = (e) => {
@@ -35,6 +29,34 @@ export function Leads ({setClientes}) {
     const handleChangeTel = (e) => {
 		setTel(e);
 	};
+
+    const Plano = () => {
+        const options = [
+          {value: '', text: '--Escolha uma opção--'},
+          {value: 'aula', text: 'Aula Avulsa'},
+          {value: 'plano4', text: 'Plano 4 aulas'},
+          {value: 'plano8', text: 'Plano 8 aulas'},
+        ];
+      
+        const [plano, setPlano] = useState(options[0].value);
+      
+        const handleChangePlano = event => {
+          console.log(event.target.value);
+          setPlano(event.target.value);
+        };
+      
+        return (
+          <div>
+            <select value={plano} onChange={handleChangePlano}>
+              {options.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.text}
+                </option>
+              ))}
+            </select>
+          </div>
+        );
+      };
     
     return (
         <div>            
@@ -65,22 +87,17 @@ export function Leads ({setClientes}) {
             <label className={ styles.dados }>
                 <p>Endereço</p>
                 <input className={ styles.dados } placeholder="Cep" type="text" onChange={(event)=>setEnd({...end, cep:event.target.value})}/> <br />
-                <input className={ styles.dados } placeholder="Bairro" type="text" /> <br />
-                <input className={ styles.dados } placeholder="Rua" type="text" /> <br />
-                <input className={ styles.dados } placeholder="Número" type="text" /> <br />
-                <input className={ styles.dados } placeholder="Complemento" type="text" /> <br />
-                <input className={ styles.dados } placeholder="Cidade" type="text" /> <br />
-                <input className={ styles.dados } placeholder="Estado" type="text" /> <br />
+                <input className={ styles.dados } value={end.bairro} disabled placeholder="Bairro" type="text" /> <br />
+                <input className={ styles.dados } value={end.rua} disabled placeholder="Rua" type="text" /> <br />
+                <input className={ styles.dados } value={end.numero} placeholder="Número" type="text" onChange={(event)=>setEnd({...end, numero:event.target.value})} /> <br />
+                <input className={ styles.dados } value={end.complemento} placeholder="Complemento" type="text" onChange={(event)=>setEnd({...end, complemento:event.target.value})} /> <br />
+                <input className={ styles.dados } value={end.cidade} placeholder="Cidade" type="text" /> <br />
+                <input className={ styles.dados }  value={end.estado} placeholder="Estado" type="text" /> <br />
             </label>
          
             <label className={ styles.dados }>
                 <p>Plano</p>
-                <select name="Escolha um plano" >
-                    <option value="">Escolha um plano</option>
-                    <option value="aula">Aula Avulsa</option>
-                    <option value="plano1">Plano 4 aulas</option>
-                    <option value="palno2">Plano 8 aulas</option>
-                </select>
+                <Plano />
             </label>
 
             <label className={ styles.button } >
