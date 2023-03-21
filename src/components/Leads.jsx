@@ -4,10 +4,17 @@ import { useState, useEffect } from "react";
 
 
 export function Leads ({setClientes}) {
+    
     const [name, setName] = useState('')
     const [tel, setTel] = useState('')
     const [end, setEnd] = useState({cep:'', rua:'', numero:'', bairro:'', complemento:'', cidade:'', estado:''})
-    const
+
+    const criarCliente = (e) => {
+        e.preventDefault()
+        const cliente = {name, tel, end}
+        setClientes(cliente)
+        
+    }
 
 
 	useEffect(() => {
@@ -22,6 +29,12 @@ export function Leads ({setClientes}) {
 	}, [end.cep]);
 
 
+    // const handleChangeCliente = (e) => {
+    //   e.preventDefault();
+    //   console.log(clientes)
+    //   setClientes(e);
+    // }
+
     const handleChangeName = (e) => {
 		setName(e);
 	};
@@ -30,37 +43,13 @@ export function Leads ({setClientes}) {
 		setTel(e);
 	};
 
-    const Plano = () => {
-        const options = [
-          {value: '', text: '--Escolha uma opção--'},
-          {value: 'aula', text: 'Aula Avulsa'},
-          {value: 'plano4', text: 'Plano 4 aulas'},
-          {value: 'plano8', text: 'Plano 8 aulas'},
-        ];
-      
-        const [plano, setPlano] = useState(options[0].value);
-      
-        const handleChangePlano = event => {
-          console.log(event.target.value);
-          setPlano(event.target.value);
-        };
-      
-        return (
-          <div>
-            <select value={plano} onChange={handleChangePlano}>
-              {options.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.text}
-                </option>
-              ))}
-            </select>
-          </div>
-        );
-      };
+  
+
+    
     
     return (
         <div>            
-        <form className={ styles.form } onSubmit={setClientes} >
+        <form className={ styles.form } onSubmit={criarCliente} >
             <label className={ styles.cadastro}>
 				<h1>Cadastrar Cliente</h1>
 			</label>
@@ -95,10 +84,6 @@ export function Leads ({setClientes}) {
                 <input className={ styles.dados }  value={end.estado} placeholder="Estado" type="text" /> <br />
             </label>
          
-            <label className={ styles.dados }>
-                <p>Plano</p>
-                <Plano />
-            </label>
 
             <label className={ styles.button } >
 				<input 

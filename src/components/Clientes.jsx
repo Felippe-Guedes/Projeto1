@@ -1,5 +1,8 @@
-export function Clientes() {
+import TabelaClientes from './TabelaClientes'
+
+
+export function Clientes({clientes}) {
     return(
-        <h1>Clientes</h1>
+        <TabelaClientes clientes={clientes}/>
     )
 }
