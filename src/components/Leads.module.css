@@ -1,6 +1,6 @@
 .form {
     border: solid 1px #000;
-    padding: 50px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,7 @@
     border-radius: 5px;
     margin-top: 10rem;
     font-family: "Roboto", sans-serif;
-        
+    font-size: 0.95rem;        
 }
 
 
@@ -23,6 +23,7 @@
   }
 
 .dados {
+ 
     margin-bottom: 1rem;     
 }
 

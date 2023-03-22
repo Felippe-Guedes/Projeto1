@@ -8,6 +8,7 @@ export function Leads ({setClientes}) {
     const [name, setName] = useState('')
     const [tel, setTel] = useState('')
     const [end, setEnd] = useState({cep:'', rua:'', numero:'', bairro:'', complemento:'', cidade:'', estado:''})
+    const [dog, setDog] = useState ('')
 
     const criarCliente = (e) => {
         e.preventDefault()
@@ -29,11 +30,6 @@ export function Leads ({setClientes}) {
 	}, [end.cep]);
 
 
-    // const handleChangeCliente = (e) => {
-    //   e.preventDefault();
-    //   console.log(clientes)
-    //   setClientes(e);
-    // }
 
     const handleChangeName = (e) => {
 		setName(e);
@@ -43,9 +39,10 @@ export function Leads ({setClientes}) {
 		setTel(e);
 	};
 
-  
-
-    
+    const handleChangeDog = (e) => {
+        setDog(e);
+    }
+   
     
     return (
         <div>            
@@ -56,11 +53,19 @@ export function Leads ({setClientes}) {
 
 
             <label className={ styles.dados }>
-                <p>Nome completo</p>
+                <p>Nome do cliente</p>
                 <input 
                 type="text"
                 value={name} 
                 onChange={(event)=> handleChangeName(event.target.value)}/>           
+            </label>
+
+            <label className={ styles.dados }>
+                <p>Nome do cão</p>
+                <input 
+                type="text"
+                value={dog}
+                onChange={(event)=> handleChangeDog(event.target.value)}/> 
             </label>
 
             <label className={ styles.dados }>
@@ -83,6 +88,9 @@ export function Leads ({setClientes}) {
                 <input className={ styles.dados } value={end.cidade} placeholder="Cidade" type="text" /> <br />
                 <input className={ styles.dados }  value={end.estado} placeholder="Estado" type="text" /> <br />
             </label>
+
+            
+
          
 
             <label className={ styles.button } >

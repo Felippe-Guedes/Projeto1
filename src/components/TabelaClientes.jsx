@@ -42,6 +42,7 @@ export default function CustomizedTables({clientes}) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Nome</StyledTableCell>
+            <StyledTableCell align="center">Nome do cão</StyledTableCell>
             <StyledTableCell align="center">Telefone</StyledTableCell>
             <StyledTableCell align="center">Rua</StyledTableCell>
             <StyledTableCell align="center">Número</StyledTableCell>
@@ -56,6 +57,7 @@ export default function CustomizedTables({clientes}) {
               <StyledTableCell component="th" scope="cliente">
                 {cliente.name}
               </StyledTableCell>
+              <StyledTableCell align="center">{cliente.dog}</StyledTableCell>
               <StyledTableCell align="center">{cliente.tel}</StyledTableCell>
               <StyledTableCell align="center">{cliente.end.rua}</StyledTableCell>
               <StyledTableCell align="center">{cliente.end.numero}</StyledTableCell>
