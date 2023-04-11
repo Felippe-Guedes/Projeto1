@@ -1,3 +1,4 @@
+import { Clientes } from "./Clientes";
 import styles from "./Leads.module.css";
 import { useState, useEffect } from "react";
 
@@ -9,11 +10,18 @@ export function Leads ({setClientes}) {
     const [tel, setTel] = useState('')
     const [end, setEnd] = useState({cep:'', rua:'', numero:'', bairro:'', complemento:'', cidade:'', estado:''})
     const [dog, setDog] = useState ('')
-
+    
+    function irParaCliente () {
+        setTimeout(() => {
+            <Clientes/>
+        }, 2000);
+    }
     const criarCliente = (e) => {
         e.preventDefault()
         const cliente = {name, tel, end}
         setClientes(cliente)
+
+        return ( irParaCliente()) 
         
     }
 
@@ -42,7 +50,8 @@ export function Leads ({setClientes}) {
     const handleChangeDog = (e) => {
         setDog(e);
     }
-   
+
+    
     
     return (
         <div>            
@@ -96,7 +105,7 @@ export function Leads ({setClientes}) {
             <label className={ styles.button } >
 				<input 
 					type="submit" 
-					value={"Cadastrar"}
+					value={"Cadastrar"}                    
 				/>
             </label>    
 

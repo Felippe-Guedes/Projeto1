@@ -17,18 +17,24 @@ export function Appointments({text}) {
     setClientes([cliente])
   }
 }
-  
-
+ 
   useEffect(() => {
       console.log(clientes)
   }, [clientes])
+
+  function handleDeleteClient (clientToDelete) {
+    const clientsWhitoutDeletedOne = clientes.filter(cliente => {
+      return cliente !== clientToDelete;
+    })
+    setClientes(clientsWhitoutDeletedOne);
+  }
   
 
     if (text==='Cadastrar cliente'){
      return (<Leads setClientes={addCliente}/>)
     } 
     if (text==='Clientes'){
-      return (<Clientes clientes={clientes}/>)
+      return (<Clientes clientes={clientes} deletarCliente={handleDeleteClient}/>)
     }
     if (text==='Agenda'){
       return (<Agenda/>)

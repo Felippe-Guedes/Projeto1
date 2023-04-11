@@ -30,12 +30,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 
-export default function CustomizedTables({clientes}) {
+export default function CustomizedTables({clientes, deletarCliente}) {
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -62,7 +61,7 @@ export default function CustomizedTables({clientes}) {
               <StyledTableCell align="center">{cliente.end.rua}</StyledTableCell>
               <StyledTableCell align="center">{cliente.end.numero}</StyledTableCell>
               <StyledTableCell align="center">{cliente.end.complemento}</StyledTableCell>
-              <StyledTableCell align="center"> <IconButton aria-label="delete">< DeleteForeverIcon/></IconButton> 
+              <StyledTableCell align="center"> <IconButton aria-label="delete" onClick={()=>{deletarCliente(cliente)}}>< DeleteForeverIcon /></IconButton> 
               </StyledTableCell>
 
             </StyledTableRow>
